@@ -25,9 +25,15 @@
         <span>This is For You💕</span>
     </div>
 
-    <!-- Pemutar Musik Background (tersembunyi) -->
-    <audio id="backgroundMusic" autoplay loop>
-        <source src="Music" type="audio/mpeg">
+    <!-- Overlay untuk Memulai Musik -->
+    <div id="startScreen" style="position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.8); color: white; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+        <h2>Click to Start 🎶</h2>
+        <button id="startButton" style="padding: 10px 20px; font-size: 18px; cursor: pointer;">Start</button>
+    </div>
+
+    <!-- Pemutar Musik Background -->
+    <audio id="backgroundMusic" loop>
+        <source src="Music.mp3" type="audio/mpeg">
         Browser Anda tidak mendukung elemen audio.
     </audio>
 
@@ -38,21 +44,14 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("startButton").addEventListener("click", function() {
             const audio = document.getElementById("backgroundMusic");
-            audio.volume = 0.3; // Set volume agar tidak terlalu keras
-            
-            // Coba putar otomatis
-            const playMusic = () => {
-                audio.play().catch(error => {
-                    console.log("Autoplay dicegah oleh browser. Klik di mana saja untuk memulai musik.");
-                });
-            };
-
-            playMusic();
-
-            // Jika autoplay gagal, jalankan musik saat pengguna pertama kali klik di halaman
-            document.body.addEventListener("click", playMusic, { once: true });
+            audio.volume = 0.3; // Atur volume awal lebih rendah
+            audio.play().then(() => {
+                document.getElementById("startScreen").style.display = "none"; // Sembunyikan layar start
+            }).catch(error => {
+                console.log("Autoplay masih diblokir, coba interaksi lain.");
+            });
         });
     </script>
 </body>
