@@ -10,25 +10,50 @@
 </head>
 <body>
     <div class="greetings">
-    <!-- silahkan menambah kata sesuai keinginan dengan <span>text...</span -->
         <span>H</span>
-        <span>A</span>
-        <span>L</span>
-        <span>L</span>
-        <span>O</span>
+        <span>I</span>
+        <span>, </span>
+        <span> </span>
+        <span> </span>
         <span>B</span>
         <span>A</span>
         <span>B</span>
         <span>Y</span>
     </div>
     <div class="description">
-        <span>I HAVE SOMETHING SPECIAL FOR YOU....</span>
+        <span>Happy Valentine day, Honey....</span>
+        <span>This is For You💕</span>
     </div>
+
+    <!-- Pemutar Musik Otomatis -->
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="Music.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
     <div class="button">
         <button>
-            <a href="flower.html">CLICK HERE, BABY</a>
+            <a href="flower.html">Click Here</a>
         </button>
-        
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById("backgroundMusic");
+            audio.volume = 0.5; // Atur volume awal ke 50%
+            
+            // Coba putar musik (beberapa browser butuh interaksi dulu)
+            const playMusic = () => {
+                audio.play().catch(error => {
+                    console.log("Autoplay dicegah oleh browser. Klik di mana saja untuk memulai musik.");
+                });
+            };
+
+            playMusic();
+
+            // Jika autoplay gagal, putar saat pengguna pertama kali klik di halaman
+            document.body.addEventListener("click", playMusic, { once: true });
+        });
+    </script>
 </body>
 </html>
