@@ -25,9 +25,9 @@
         <span>This is For You💕</span>
     </div>
 
-    <!-- Pemutar Musik Otomatis -->
+    <!-- Pemutar Musik Background (tersembunyi) -->
     <audio id="backgroundMusic" autoplay loop>
-        <source src="Music.mp3" type="audio/mpeg">
+        <source src="Music" type="audio/mpeg">
         Browser Anda tidak mendukung elemen audio.
     </audio>
 
@@ -40,9 +40,9 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const audio = document.getElementById("backgroundMusic");
-            audio.volume = 0.5; // Atur volume awal ke 50%
+            audio.volume = 0.3; // Set volume agar tidak terlalu keras
             
-            // Coba putar musik (beberapa browser butuh interaksi dulu)
+            // Coba putar otomatis
             const playMusic = () => {
                 audio.play().catch(error => {
                     console.log("Autoplay dicegah oleh browser. Klik di mana saja untuk memulai musik.");
@@ -51,7 +51,7 @@
 
             playMusic();
 
-            // Jika autoplay gagal, putar saat pengguna pertama kali klik di halaman
+            // Jika autoplay gagal, jalankan musik saat pengguna pertama kali klik di halaman
             document.body.addEventListener("click", playMusic, { once: true });
         });
     </script>
