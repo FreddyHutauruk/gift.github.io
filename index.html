@@ -10,49 +10,42 @@
 </head>
 <body>
     <div class="greetings">
-        <span>H</span>
-        <span>I</span>
-        <span>, </span>
-        <span> </span>
-        <span> </span>
-        <span>B</span>
-        <span>A</span>
-        <span>B</span>
-        <span>Y</span>
-    </div>
-    <div class="description">
-        <span>Happy Valentine day, Honey....</span>
-        <span>This is For You💕</span>
+        <span>H</span><span>I</span><span>, </span><span> </span>
+        <span>B</span><span>A</span><span>B</span><span>Y</span>
     </div>
 
-    <!-- Pemutar Musik Background (tersembunyi) -->
-    <audio id="backgroundMusic" autoplay loop>
-        <source src="music/love-song.mp3" type="audio/mpeg">
+    <div class="description">
+        <span>Happy Valentine’s Day, Honey...💕</span>
+        <span>This is For You</span>
+    </div>
+
+    <!-- Pemutar Musik Background -->
+    <audio id="backgroundMusic" loop>
+        <source src="img/Music.mp3" type="audio/mpeg">
         Browser Anda tidak mendukung elemen audio.
     </audio>
 
     <div class="button">
-        <button>
-            <a href="flower.html">Click Here</a>
-        </button>
+        <a href="flower.html">
+            <button>Click Here</button>
+        </a>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const audio = document.getElementById("backgroundMusic");
-            audio.volume = 1.0; // Set volume agar tidak terlalu keras
-            
-            // Coba putar otomatis
-            const playMusic = () => {
-                audio.play().catch(error => {
-                    console.log("Autoplay dicegah oleh browser. Klik di mana saja untuk memulai musik.");
-                });
-            };
+            audio.volume = 1.0; // Set volume ke 100%
 
-            playMusic();
+            // Coba langsung putar musik (bisa dicegah browser)
+            audio.play().catch(() => {
+                console.log("Autoplay dicegah. Klik di mana saja untuk memulai musik.");
+            });
 
             // Jika autoplay gagal, jalankan musik saat pengguna pertama kali klik di halaman
-            document.body.addEventListener("click", playMusic, { once: true });
+            document.body.addEventListener("click", () => {
+                audio.play();
+                console.log("Musik dimulai setelah klik!");
+            }, { once: true });
         });
     </script>
 </body>
