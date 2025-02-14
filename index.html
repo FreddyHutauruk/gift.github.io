@@ -21,7 +21,8 @@
 
     <!-- Pemutar Musik Background -->
     <audio id="backgroundMusic" loop>
-        <source src="img/Music.mp3" type="audio/mpeg">
+        <source src="img/Music" type="audio/mpeg">
+        <source src="img/Music.ogg" type="audio/ogg">
         Browser Anda tidak mendukung elemen audio.
     </audio>
 
@@ -36,15 +37,15 @@
             const audio = document.getElementById("backgroundMusic");
             audio.volume = 1.0; // Set volume ke 100%
 
-            // Coba langsung putar musik (bisa dicegah browser)
-            audio.play().catch(() => {
-                console.log("Autoplay dicegah. Klik di mana saja untuk memulai musik.");
-            });
-
-            // Jika autoplay gagal, jalankan musik saat pengguna pertama kali klik di halaman
+            // Autoplay dengan interaksi pertama kali pengguna
             document.body.addEventListener("click", () => {
-                audio.play();
-                console.log("Musik dimulai setelah klik!");
+                if (audio.paused) {
+                    audio.play().then(() => {
+                        console.log("Musik mulai diputar!");
+                    }).catch(error => {
+                        console.error("Gagal memutar musik:", error);
+                    });
+                }
             }, { once: true });
         });
     </script>
